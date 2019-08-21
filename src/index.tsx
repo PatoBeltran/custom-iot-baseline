@@ -25,7 +25,7 @@ ReactDOM.render(
     <React.StrictMode>
         <ErrorBoundary message='Something went wrong'>
             <React.Suspense fallback=''>
-                <BrowserRouter>
+                <BrowserRouter basename={process.env.PUBLIC_URL}>
                     <Shell />
                 </BrowserRouter>
             </React.Suspense>
