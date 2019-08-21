@@ -18,6 +18,8 @@ export interface Properties {
 export const Themes = {
     dark: 'dark',
     light: 'light',
+    fluentLight: 'fluent-light',
+    fluentDark: 'fluent-dark',
 }
 
 export function SettingsPanel({ loc, onSave, onCancel, settings }: Properties) {
@@ -39,7 +41,9 @@ export function SettingsPanel({ loc, onSave, onCancel, settings }: Properties) {
                 value={theme}
                 options={[
                     { label: loc('settings.themes.dark'), value: Themes.dark },
-                    { label: loc('settings.themes.light'), value: Themes.light }
+                    { label: loc('settings.themes.light'), value: Themes.light },
+                    { label: loc('settings.themes.fluentLight'), value: Themes.fluentLight },
+                    { label: loc('settings.themes.fluentDark'), value: Themes.fluentDark }
                 ]}
                 autoFocus
                 onChange={changeTheme}

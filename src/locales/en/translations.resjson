@@ -18,7 +18,9 @@
     "theme": "Theme",
     "themes": {
       "dark": "Dark",
-      "light": "Light"
+      "light": "Light",
+      "fluentDark": "Fluent Dark",
+      "fluentLight": "Fluent Light"
     }
   },
   "help": {

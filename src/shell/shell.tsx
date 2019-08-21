@@ -11,10 +11,13 @@ import { Navigation } from './navigation';
 import './shell.fonts.scss';
 import { ErrorBoundary } from '../errorBoundary';
 
+export const ThemeContext = React.createContext<string>(Themes.light);
+
 export default function Shell() {
   const [loc, i18n] = useTranslation();
   const [expanded, changeExpanded] = React.useState<string>('');
   const [settings, changeSettings] = React.useState({ theme: Themes.light });
+
   function handleViewCollapse() {
     // reset expanded to its default state. IMPORTANT: don't stop event
     // propagation here: this will block clicking behavior for some html
@@ -30,22 +33,24 @@ export default function Shell() {
   const navProps = useNavigationProperties(loc);
   const mastheadProps = getMastheadProperties(loc, expanded, changeExpanded, navProps)
   return (
-    <FluentShell
-      theme={settings.theme}
-      isRtl={i18n.dir() === 'rtl'}
-      navigation={navProps}
-      masthead={mastheadProps}
-      onClick={handleViewCollapse}>
-      <ErrorBoundary message={loc('errors.default')}>
-        <React.Suspense fallback={<HorizontalLoader />}>
-          <Routes />
-        </React.Suspense>
-      </ErrorBoundary>
-      <div onClick={blockViewCollapse}>
-        {expanded === 'settingsPanel' && <SettingsPanel settings={settings} onSave={handleSettingsSave} onCancel={handleViewCollapse} loc={loc} />}
-        {expanded === 'helpPanel' && <HelpPanel onCancel={handleViewCollapse} loc={loc} />}
-      </div>
-    </FluentShell>
+    <ThemeContext.Provider value={settings.theme}>
+      <FluentShell
+        theme={settings.theme}
+        isRtl={i18n.dir() === 'rtl'}
+        navigation={navProps}
+        masthead={mastheadProps}
+        onClick={handleViewCollapse}>
+        <ErrorBoundary message={loc('errors.default')}>
+          <React.Suspense fallback={<HorizontalLoader />}>
+            <Routes />
+          </React.Suspense>
+        </ErrorBoundary>
+        <div onClick={blockViewCollapse}>
+          {expanded === 'settingsPanel' && <SettingsPanel settings={settings} onSave={handleSettingsSave} onCancel={handleViewCollapse} loc={loc} />}
+          {expanded === 'helpPanel' && <HelpPanel onCancel={handleViewCollapse} loc={loc} />}
+        </div>
+      </FluentShell>
+    </ThemeContext.Provider>
   );
 }
 
