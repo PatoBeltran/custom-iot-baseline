@@ -2,6 +2,9 @@
   "name": "@microsoft/azure-iot-ux-baseline",
   "version": "4.0.0",
   "private": true,
+  "engines": {
+    "node": "10.1.0"
+  },
   "dependencies": {
     "@microsoft/azure-iot-ux-fluent-controls": "^6.2.5",
     "@microsoft/azure-iot-ux-fluent-css": "6.0.0",
