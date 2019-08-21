@@ -1,0 +1,9 @@
+{
+  "masthead": "Azure IoT Grundlinie Benutzererfahrung",
+  "navigation": {
+    "collapse": "Seitennavigationsleiste reduzieren",
+    "expand": "Seitennavigationsleiste erweitern",
+    "home": "Zuhause",
+    "examples": "Beispiele"
+  }
+}

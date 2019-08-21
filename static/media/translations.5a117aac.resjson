@@ -1,0 +1,30 @@
+{
+  "masthead": "Azure IoT UX Baseline",
+  "navigation": {
+    "collapse": "Collapse Side Navigation",
+    "expand": "Expand Side Navigation",
+    "home": "Homepage",
+    "examples": "Examples"
+  },
+  "save": "Save",
+  "cancel": "Cancel",
+  "logout": "Logout",
+  "more": "More",
+  "errors": {
+    "default": "Something went wrong"
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": "Theme",
+    "themes": {
+      "dark": "Dark",
+      "light": "Light",
+      "fluentDark": "Fluent Dark",
+      "fluentLight": "Fluent Light"
+    }
+  },
+  "help": {
+    "title": "Help",
+    "getStarted": "Get Started"
+  }
+}
