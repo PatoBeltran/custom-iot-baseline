@@ -76,9 +76,9 @@ export default function Home() {
             <div className={cx('control')}>
                 <Alert onClose={() =>{}} type={AlertType.Error}>This is an alert!</Alert>
             </div>
-            {/* {(theme === 'fluent-light' || theme === 'fluent-dark') && <div className={cx('control')}>
+            {(theme === 'fluent-light' || theme === 'fluent-dark') && <div className={cx('control')}>
                 <Alert onClose={() => { }} type={AlertType.Success}>This is an alert!</Alert>
-            </div>} */}
+            </div>}
             <div className={cx('control')}>
                 <HorizontalLoader />
             </div>
