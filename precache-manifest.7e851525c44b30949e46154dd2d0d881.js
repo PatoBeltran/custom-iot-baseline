@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e8c170197145dc613be2602186224aca",
+    "revision": "f4509eaa113755f59e286f57bb691a04",
     "url": "/custom-iot-baseline/index.html"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/custom-iot-baseline/static/css/6.200cd61c.chunk.css"
   },
   {
-    "revision": "fe52057ff01c9cce2347",
+    "revision": "4a9ea4b1d88850a887b7",
     "url": "/custom-iot-baseline/static/css/main.4ac0b26b.chunk.css"
   },
   {
@@ -48,8 +48,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/custom-iot-baseline/static/js/6.9b945298.chunk.js"
   },
   {
-    "revision": "fe52057ff01c9cce2347",
-    "url": "/custom-iot-baseline/static/js/main.c3d6a426.chunk.js"
+    "revision": "4a9ea4b1d88850a887b7",
+    "url": "/custom-iot-baseline/static/js/main.6bf35b0d.chunk.js"
   },
   {
     "revision": "aa26a6f09b906fa0cae8",
