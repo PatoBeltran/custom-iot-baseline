@@ -20,6 +20,21 @@ export const Paths = {
         list: '/examples/list',
         inputs: '/examples/inputs',
     },
+    fun1: {
+        index: '/fun1'
+    },
+    fun2: {
+        index: '/fun2'
+    },
+    fun3: {
+        index: '/fun3'
+    },
+    fun4: {
+        index: '/fun4'
+    },
+    fun5: {
+        index: '/fun5'
+    }
 };
 
 /** 

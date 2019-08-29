@@ -6,14 +6,15 @@ import { TranslationFunction, useTranslation } from '../i18n';
 import { Settings, SettingsPanel, Themes } from './settings';
 import { HelpPanel } from './help';
 import { Routes } from './routes';
-import { Navigation } from './navigation';
+import { Navigation, BottomNavigation } from './navigation';
 
 import './shell.fonts.scss';
 import { ErrorBoundary } from '../errorBoundary';
+import { withRouter } from 'react-router';
 
 export const ThemeContext = React.createContext<string>(Themes.light);
 
-export default function Shell() {
+function Shell() {
   const [loc, i18n] = useTranslation();
   const [expanded, changeExpanded] = React.useState<string>('');
   const [settings, changeSettings] = React.useState({ theme: Themes.light });
@@ -67,7 +68,8 @@ function useNavigationProperties(loc: TranslationFunction): NavigationProperties
         title: loc(isExpanded ? 'navigation.collapse': 'navigation.expand'),
       },
     },
-    children: <Navigation loc={loc} />
+    children: <Navigation loc={loc} />,
+    farBottomChildren: <BottomNavigation loc={loc} />
   }
 }
 
@@ -115,3 +117,5 @@ function getExpandCallback(expand: string, changeExpanded: (expanded: string) =>
     changeExpanded(expand);
   };
 }
+
+export default withRouter(Shell);

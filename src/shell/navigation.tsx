@@ -13,7 +13,17 @@ export function Navigation({ loc }: { loc: TranslationFunction}) {
         <>
             <NavItem to={Paths.home.index} exact title={loc('navigation.home')} icon='icon-home' text={loc('navigation.home')} />
             <NavItem to={Paths.examples.index} title={loc('navigation.examples')} icon='icon-education' text={loc('navigation.examples')} />
+            <NavItem to={Paths.fun1.index} title={loc('navigation.examples')} icon='icon-education' text={loc('navigation.examples')} />
+            <NavItem to={Paths.fun2.index} title={loc('navigation.examples')} icon='icon-education' text={loc('navigation.examples')} />
+            <NavItem to={Paths.fun3.index} title={loc('navigation.examples')} icon='icon-education' text={loc('navigation.examples')} />
+            <NavItem to={Paths.fun4.index} title={loc('navigation.examples')} icon='icon-education' text={loc('navigation.examples')} />
         </>
+    );
+}
+
+export function BottomNavigation({ loc }: { loc: TranslationFunction }) {
+    return (
+        <NavItem to={Paths.fun5.index} title={loc('navigation.examples')} icon='icon-education' text={loc('navigation.examples')} />
     );
 }
 
