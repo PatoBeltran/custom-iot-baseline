@@ -14,14 +14,16 @@ import { List } from '../examples/list';
 import * as InlinePopup from '@microsoft/azure-iot-ux-fluent-controls/lib/components/InlinePopup';
 import { PivotMenu } from '@microsoft/azure-iot-ux-fluent-controls/lib/components/Pivot';
 import { FormOption } from '@microsoft/azure-iot-ux-fluent-controls/lib/Common';
-import SearchInput from '@microsoft/azure-iot-ux-fluent-controls/lib/components/SearchInput/SearchInput';
 import { DateTimeField } from '@microsoft/azure-iot-ux-fluent-controls/lib/components/DateTime';
-import { ThemeContext } from '../../shell/shell';
+import { Accordion } from '@microsoft/azure-iot-ux-fluent-controls/lib/components/Accordion';
+import CheckboxInput from '@microsoft/azure-iot-ux-fluent-controls/lib/components/Input/CheckboxInput';
+import NumberInput from '@microsoft/azure-iot-ux-fluent-controls/lib/components/Input/NumberInput';
 
 const cx = classnames.bind(require('./home.module.scss'));
 
 export default function Home() {
     const [loc] = useTranslation();
+    const [acc, setAcc] = React.useState(true);
     const [val, setVal] = React.useState(false);
     const [expanded, setExpanded] = React.useState(false);
     const [checkbox, setCheckbox] = React.useState(false);
@@ -30,15 +32,27 @@ export default function Home() {
     const [select, setSelect] = React.useState<string | FormOption>('1');
     const [textArea, setTextArea] = React.useState('');
     const [text, setText] = React.useState('');
-    const [search, setSearch] = React.useState('');
     const [datetime, setDatetime] = React.useState('');
-    const theme = React.useContext(ThemeContext);
+    const [number, setNumber] = React.useState<number | 'invalid'>(0);
 
     return (
-        <>
+        <div className={cx('container')}>
             <h1 className={cx('header')}>{loc('navigation.home')}</h1>
             <div className={cx('control')}>
+                <Icon icon='chevronDown' />
+                <Icon icon='delete' />
+                <Icon icon='cancel' />
+                <Icon icon='chevronUp' />
+                <Icon icon='Cancel' />
+            </div>
+            <div className={cx('control')}>
                 <ToggleField name='toggle' label='Label' onChange={setVal} value={val} />
+            </div>
+            <div className={cx('control')}>
+                <ToggleField name='toggle' label='Label' onChange={() => {}} value={true} disabled />
+            </div>
+            <div className={cx('control')}>
+                <ToggleField name='toggle' label='Label' onChange={() => {}} value={false} disabled />
             </div>
             <div className={cx('control')}>
                 <Button onClick={() =>{}}>Button</Button>
@@ -76,9 +90,9 @@ export default function Home() {
             <div className={cx('control')}>
                 <Alert onClose={() =>{}} type={AlertType.Error}>This is an alert!</Alert>
             </div>
-            {(theme === 'fluent-light' || theme === 'fluent-dark') && <div className={cx('control')}>
+            <div className={cx('control')}>
                 <Alert onClose={() => { }} type={AlertType.Success}>This is an alert!</Alert>
-            </div>}
+            </div>
             <div className={cx('control')}>
                 <HorizontalLoader />
             </div>
@@ -86,12 +100,25 @@ export default function Home() {
                 <Spinner />
             </div>
             <div className={cx('control')}>
+                <Thumbnail size='search-result' kind='product' />
                 <Thumbnail size='search-result' kind='device' />
+                <Thumbnail size='search-result' kind='user' />
+                <Thumbnail size='search-result' kind='unknown' />
+                <Thumbnail size='search-result' kind='missing' />
             </div>
             <div className={cx('control')}>
-                <GalleryCard banner='Comming Soon' background={
-                    <SolidBackground backgroundColor='blue' fixed>
-                        <Icon icon='page' size={IconSize.large} centered className={cx('icon')} />
+                <a className={cx('gallery-card-link')} href='localhost:3000'>
+                    <GalleryCard banner='Comming Soon' background={
+                        <SolidBackground backgroundColor='blue' fixed className={cx('card-bg')}>
+                            <Icon icon='page' size={IconSize.large} className={cx('icon')} />
+                        </SolidBackground>} fixed>
+                        <header>This is the title</header>
+                        <section>We here explain what this card is and why you should use it without any issues</section>
+                    </GalleryCard>
+                </a>
+               <GalleryCard banner='Comming Soon' background={
+                    <SolidBackground backgroundColor='' fixed className={cx('card-bg')}>
+                        <Icon icon='page' size={IconSize.large} className={cx('icon')} />
                     </SolidBackground>} fixed>
                     <header>This is the title</header>
                     <section>We here explain what this card is and why you should use it without any issues</section>
@@ -101,13 +128,11 @@ export default function Home() {
                 <List />
             </div>
             <div className={cx('control')}>
-                <InlinePopup.Container
-                    expanded={expanded}
-                    onClick={expanded ? () => setExpanded(false) : () => setExpanded(true)}>
-                    <InlinePopup.Label>
+                <InlinePopup.Container expanded={expanded}>
+                    <InlinePopup.Label onClick={expanded ? () => setExpanded(false) : () => setExpanded(true)}>
                         <Icon icon='info' />
                     </InlinePopup.Label>
-                    <InlinePopup.Panel alignment='left'>
+                    <InlinePopup.Panel alignment='left' expanded={expanded}>
                         <ul role='listbox' className={cx('option-list')}>
                             {['One', 'Two', 'Three'].map((option, index) =>
                                 <li key={index} role='presentation'>
@@ -141,12 +166,18 @@ export default function Home() {
                         key: 'three',
                         icon: 'checkMark',
                         label: 'Three',
-                        href: ''
+                        href: '',
                     }
                 ]} active='three' />
             </div>
             <div className={cx('control')}>
                 <CheckboxField name='checkbox' label='Checkbox' value={checkbox} onChange={() => setCheckbox(c => !c)} />
+            </div>
+            <div className={cx('control')}>
+                <CheckboxInput name='checkbox' label='Checkbox' indeterminate onChange={() => {}} />
+            </div>
+            <div className={cx('control')}>
+                <CheckboxInput name='checkbox' label='Checkbox' indeterminate disabled onChange={() => {}} />
             </div>
             <div className={cx('control')}>
                 <CheckboxField disabled name='checkbox' label='Checkbox' value={checkbox} onChange={() => setCheckbox(c => !c)} />
@@ -241,7 +272,10 @@ export default function Home() {
                     onChange={setText} />
             </div>
             <div className={cx('control')}>
-                <SearchInput label='Search' onSubmit={() => {}} onChange={setSearch} value={search} />
+                <NumberInput 
+                    name='text'
+                    initialValue={number}
+                    onChange={setNumber}/>
             </div>
             <div className={cx('control')}>
                 <DateTimeField name='datetime' label='DateTime' initialValue={datetime} onChange={setDatetime} />
@@ -249,6 +283,11 @@ export default function Home() {
             <div className={cx('control')}>
                 <DateTimeField disabled name='datetime' label='DateTime' initialValue={datetime} onChange={setDatetime} />
             </div>
-        </>
+            <div className={cx('control')}>
+                <Accordion onToggle={() => setAcc(s => !s)} expanded={acc}>
+                    Hello
+                </Accordion>
+            </div>
+        </div>
     );
 }

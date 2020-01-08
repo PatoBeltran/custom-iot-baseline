@@ -9,7 +9,7 @@ export interface Properties {
 
 export function HelpPanel({ loc, onCancel }: Properties) {
     return (
-        <ContextPanel header={loc('help.title')} onClose={onCancel}>
+        <ContextPanel header={loc('help.title')} onClose={onCancel} attr={{ footer: { style: 'display: flex; justify-content: space-around'}}}>
             <a className='link' href='https://github.com/Azure/iot-ux-baseline' target='_blank' rel='noopener noreferrer'>{loc('help.getStarted')}</a>
         </ContextPanel>
     );

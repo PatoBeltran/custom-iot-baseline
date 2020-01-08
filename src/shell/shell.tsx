@@ -15,32 +15,36 @@ import { withRouter } from 'react-router';
 export const ThemeContext = React.createContext<string>(Themes.light);
 
 function Shell() {
-  const [loc, i18n] = useTranslation();
+  const [loc] = useTranslation();
   const [expanded, changeExpanded] = React.useState<string>('');
   const [settings, changeSettings] = React.useState({ theme: Themes.light });
 
-  function handleViewCollapse() {
+  const handleViewCollapse = React.useCallback(() => {
     // reset expanded to its default state. IMPORTANT: don't stop event
     // propagation here: this will block clicking behavior for some html
     // elements like <a>, input checkboxes, and buttons.
     changeExpanded('');
-  }
+  }, []);
 
-  function handleSettingsSave(newSettings: Settings) {
+  React.useEffect(() => {
+    document.documentElement.setAttribute('theme', settings.theme);
+
+    document.addEventListener('click', handleViewCollapse, { passive: true });
+    return document.removeEventListener('click', handleViewCollapse);
+  }, [settings.theme, handleViewCollapse]);
+
+  const handleSettingsSave = React.useCallback((newSettings: Settings) => {
     changeSettings(newSettings);
     handleViewCollapse();
-  }
+  }, [handleViewCollapse]);
 
   const navProps = useNavigationProperties(loc);
-  const mastheadProps = getMastheadProperties(loc, expanded, changeExpanded, navProps)
+  const mastheadProps = useMastheadProperties(loc, expanded, changeExpanded, navProps)
   return (
     <ThemeContext.Provider value={settings.theme}>
       <FluentShell
-        theme={settings.theme}
-        isRtl={i18n.dir() === 'rtl'}
         navigation={navProps}
-        masthead={mastheadProps}
-        onClick={handleViewCollapse}>
+        masthead={mastheadProps}>
         <ErrorBoundary message={loc('errors.default')}>
           <React.Suspense fallback={<HorizontalLoader />}>
             <Routes />
@@ -68,13 +72,15 @@ function useNavigationProperties(loc: TranslationFunction): NavigationProperties
         title: loc(isExpanded ? 'navigation.collapse': 'navigation.expand'),
       },
     },
-    children: <Navigation loc={loc} />,
+    children: <Navigation loc={loc} isExpanded={isExpanded} />,
     farBottomChildren: <BottomNavigation loc={loc} />
   }
 }
 
-function getMastheadProperties(loc: TranslationFunction, expanded: string, changeExpanded: (expanded: string) => void, navProps: NavigationProperties): MastheadProperties {
+function useMastheadProperties(loc: TranslationFunction, expanded: string, changeExpanded: (expanded: string) => void, navProps: NavigationProperties): MastheadProperties {
+  const [serachVal, setSearchVal] = React.useState('');
   return {
+    logo: <svg style={{ fill: 'var(--color-masthead-foreground)' }} width="21" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M10.375 17.341l4.446-2.668V9.042l-4.446-2.667L5.929 9.04v5.633l4.446 2.667z"></path><path d="M10.375 0L0 5.929V9.93l4.891 2.816v-2.223L1.927 8.745v-1.63l8.448-4.892 8.448 4.891V16.6l-8.448 4.891L0 15.563v2.223l10.375 5.928 10.375-5.928V5.929L10.375 0z"></path></svg>,
     branding: loc('masthead'),
     more: {
       onClick: getExpandCallback('moreMenu', changeExpanded),
@@ -85,7 +91,16 @@ function getMastheadProperties(loc: TranslationFunction, expanded: string, chang
       isExpanded: expanded === 'navMenu',
       onClick: getExpandCallback('navMenu', changeExpanded),
       attr: navProps.attr,
-      children: navProps.children
+      children: navProps.children,
+      farBottomChildren: navProps.farBottomChildren
+    },
+    search: {
+      label: 'Search',
+      value: serachVal,
+      onChange: setSearchVal,
+      onSubmit: () => {},
+      expanded: expanded === 'search',
+      onExpand: getExpandCallback('search', changeExpanded)
     },
     toolbarItems: [
       {

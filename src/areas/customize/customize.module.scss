@@ -1,0 +1,22 @@
+@import '../../styles/mixins';
+@import '../../styles/constants';
+
+.header {
+  text-align: center;
+}
+
+.container {
+  overflow: auto;
+}
+
+.color-container {
+  padding: 0 $gutter-normal $gutter-normal $gutter-normal;
+}
+
+.accordion-container {
+  padding: $gutter-normal 0 $gutter-normal $gutter-normal;
+
+  @include rtl {
+    padding: $gutter-normal $gutter-normal $gutter-normal 0;
+  }
+}

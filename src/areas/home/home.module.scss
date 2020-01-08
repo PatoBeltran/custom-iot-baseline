@@ -6,10 +6,19 @@
   margin: 40px;
 }
 
-.icon {
+.control .icon {
   width: 76px;
   height: 76px;
   font-size: 76px;
   line-height: 76px;
-  color: var(--color-white);
+}
+
+.container {
+  overflow: auto;
+}
+
+.card-bg {
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }

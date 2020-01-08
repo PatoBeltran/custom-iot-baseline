@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { Customize } from '../areas/customize/customize';
 
 // Load the container components of each area lazily in its own bundle.
 // In general, each area should be isolated to its own bundle.
@@ -20,8 +21,8 @@ export const Paths = {
         list: '/examples/list',
         inputs: '/examples/inputs',
     },
-    fun1: {
-        index: '/fun1'
+    customize: {
+        index: '/customize'
     },
     fun2: {
         index: '/fun2'
@@ -47,6 +48,7 @@ export function Routes() {
         <Switch>
             <Route exact path={Paths.home.index} component={Home} />
             <Route path={Paths.examples.index} component={Examples} />
+            <Route path={Paths.customize.index} component={Customize} />
         </Switch>
     );
 }

@@ -42,19 +42,27 @@ export function List() {
         
         changeSelected(newSelected);
     }
-    
+
+    const name = {
+        label: 'Name',
+        mapColumn: mapNameCol,
+        onAscending: () => { },
+        onDescending: () => { }
+    };
     return (
         <>
             <h2>List</h2>
             <GenericManagementList<Row>
                 rows={rows}
                 columns={[
-                    { label: 'Name', mapColumn: mapNameCol },
+                    name,
                     { label: 'Location', mapColumn: 'location' },
                 ]}
                 isSelected={isSelected}
                 onSelect={onSelect}
                 onSelectAll={onSelectAll}
+                sortedColumn={name}
+                sortDirection='descending'
             />
         </>
     )
