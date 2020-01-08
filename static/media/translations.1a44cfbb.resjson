@@ -4,6 +4,7 @@
     "collapse": "Collapse Side Navigation",
     "expand": "Expand Side Navigation",
     "home": "Homepage",
+    "customize": "Customize",
     "examples": "Examples"
   },
   "save": "Save",
@@ -26,5 +27,26 @@
   "help": {
     "title": "Help",
     "getStarted": "Get Started"
+  },
+  "customize": {
+    "details": "Details",
+    "accent": "Accent color",
+    "masthead": "Masthead color",
+    "navigation": "Main navigation",
+    "content": "Content",
+    "notifications": {
+      "title": "Global notifications",
+      "success": "Success",
+      "informational": "Informational",
+      "warning": "Warning",
+      "error": "Error"
+    },
+    "status": {
+      "title": "General Status",
+      "success": "Success",
+      "informational": "Informational",
+      "warning": "Warning",
+      "danger": "Danger"
+    }
   }
 }
